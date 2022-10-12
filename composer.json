@@ -1,0 +1,13 @@
+{
+    "name": "whicked/landing-page",
+    "authors": [
+        {
+            "name": "whickedluho",
+            "email": "luhovicskrisztian@gmail.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^4.2",
+        "fakerphp/faker": "^1.20"
+    }
+}
