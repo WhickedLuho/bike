@@ -11,6 +11,6 @@
 <script src="public/assets/js/bootstrap/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 {* <script src="assets/js/jquery_3.6.0.js"></script>
 <link href="assets/css/select2/select2.min.css" rel="stylesheet" />
-<script src="assets/js/select2/select2.min.js"></script>
-<link href="assets/css/dev.css" rel="stylesheet" crossorigin="anonymous"> *}
+<script src="assets/js/select2/select2.min.js"></script>*}
+<link href="public/assets/css/dev.css" rel="stylesheet" crossorigin="anonymous">
 <body>
