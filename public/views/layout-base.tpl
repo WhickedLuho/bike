@@ -1,3 +1,5 @@
 {include file="header.tpl"}
-{include file="home.tpl"}
+{if !empty($page)}
+    {include file=$page}
+{/if}
 {include file="footer.tpl"}

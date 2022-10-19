@@ -7,24 +7,62 @@ $smarty->setTemplateDir('public/views/');
 $smarty->setCompileDir('public/views/compiler/');
 $smarty->setCacheDir('public/views/compiler/cache/');
 
-// var_dump('test');
-// var_dump($conn);
+$page = 'home.tpl';
+//--------------------------------------
 $sql = "SELECT * FROM categories";
 $result = $conn->query($sql);
 $categories = array();
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
+        if (strlen($row['description']) > 20)
+            $row['description'] = substr($row['description'], 0, 17) . '...';
         $categories[] = $row;
     }
 }
+$smarty->assign('categories', $categories);
+//--------------------------------------
 
 $category_id = null;
 if (!empty($_GET['category']) && $_GET['category'] > 0) {
-    $category_id = $_GET['category'];
+    $category_id = (int) $_GET['category'];
+    $page = 'products.tpl';
+
+    if (!empty($_GET['product']) && $_GET['product'] > 0) {
+        $product_id = (int) $_GET['product'];
+
+        $get_product_by_id = array();
+        $sql = "SELECT * FROM products WHERE id = $product_id";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $row['link'] = './?category=' . $category_id . '&product=' . $row['id'];
+                $get_product_by_id[] = $row;
+            }
+        }
+        print_r($get_product_by_id);
+        $smarty->assign('product', $get_product_by_id);
+    }
+
+    $get_products_by_category = array();
+    $sql = "SELECT * FROM products WHERE category_ids IN ($category_id) ORDER BY discount desc, name asc LIMIT 12";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            if (strlen($row['description']) > 85)
+                $row['description'] = substr($row['description'], 0, 87) . '...';
+
+            $row['link'] = './?category=' . $category_id . '&product=' . $row['id'];
+            $get_products_by_category[] = $row;
+        }
+    }
+    $smarty->assign('products', $get_products_by_category);
+
+
 }
 $smarty->assign('category_id', intval($category_id));
-$smarty->assign('categories', $categories);
 
 //--------------------------------------
 $sql = "SELECT * FROM products WHERE discount > 0 ORDER BY discount desc LIMIT 6";
@@ -41,8 +79,6 @@ if ($result->num_rows > 0) {
 $smarty->assign('discounted_products', $discounted_products);
 //------------------------------------
 
-// var_dump(count($discounted_products));
 
-
-
+$smarty->assign('page', $page);
 $smarty->display('layout-base.tpl');

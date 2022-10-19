@@ -29,31 +29,35 @@
             </div>
         </div>
         <div class="col-9 mt-5">
-            <div class="row mb-5">
+            {* <div class="row mb-5">
                 <p class="card-text">
                 Suspendisse vel risus luctus, feugiat ante ac, consequat mi. Nullam accumsan odio sit amet enim cursus
                 consectetur. Vestibulum sed nibh scelerisque, commodo ipsum at, consectetur purus. Vestibulum erat purus,
                 fermentum eu aliquet vitae, elementum sit amet dui. Vestibulum at tristique nisl, vitae egestas ligula. Ut
                 eu nisl vel sapien dignissim volutpat non a nibh. Ut sodales ipsum at ex tristique posuere. Donec nec mauris
-                quam. Nulla finibus dui in dapibus porta. Fusce semper arcu tortor, et condimentum ex dignissim vel. Orci
-                varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque in viverra augue.
-                Nullam sit amet lacus sit amet enim varius congue mollis vel turpis.
+                quam. Nulla finibus dui in dapibus porta.
                 </p>
-            </div>
-            {if !empty($discounted_products)}
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+            </div> *}
+            {if !empty($product)}
+                {* {var_dump($product)} *}
+                <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-2">
 
-                    {foreach $discounted_products as $key => $discounted_product}
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                    {* {foreach $product as $key => $product}
+                        <div class="col">
                             <div class="card h-100">
-                                <img src="https://picsum.photos/200/200" class="card-img-top" alt="{$discounted_product.name}">
+                                <a href="{$product.link}">
+                                    <img src="https://picsum.photos/200/200" class="card-img-top" alt="{$product.name}">
+                                </a>
                                 <div class="card-body">
-                                    <h5 class="card-title">{$discounted_product.name}</h5>
-                                    <p class="card-text">{$discounted_product.description}</p>
+                                    <h6 class="card-title">{$product.name}</h5>
+                                    <p class="card-text">{$product.description}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <h6 class="card-text text-center card-title">{$product.brutto_price} RSD {if $product.discount > 0}<small> (-{$product.discount}%)</small> {/if}</h5>
                                 </div>
                             </div>
                         </div>
-                    {/foreach}
+                    {/foreach} *}
 
                 </div>
             {/if}
