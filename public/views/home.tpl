@@ -1,9 +1,9 @@
-<div class="container">
+{* <div class="container"> *}
     <div class="row">
         <div class="col-12">
             <div class="text-center">
 
-                <img src="https://picsum.photos/1000/400" class="img-fluid" alt="header-image">
+                <img src="https://picsum.photos/1400/600" class="img-fluid" alt="header-image">
             </div>
 
         </div>
@@ -41,15 +41,20 @@
                 </p>
             </div>
             {if !empty($discounted_products)}
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="row row-cols-1 row-cols-md-3 g-2">
 
                     {foreach $discounted_products as $key => $discounted_product}
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6 product-card">
                             <div class="card h-100">
-                                <img src="https://picsum.photos/200/200" class="card-img-top" alt="{$discounted_product.name}">
+                                <a href="#">
+                                    <img src="https://picsum.photos/200/200" class="card-img-top" alt="{$discounted_product.name}">
+                                </a>
                                 <div class="card-body">
-                                    <h5 class="card-title">{$discounted_product.name}</h5>
+                                    <h6 class="card-title">{$discounted_product.name}</h5>
                                     <p class="card-text">{$discounted_product.description}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <h6 class="card-text text-center card-title">{$discounted_product.brutto_price} RSD {if $discounted_product.discount > 0}<small> (-{$discounted_product.discount}%)</small> {/if}</h5>
                                 </div>
                             </div>
                         </div>
@@ -59,4 +64,4 @@
             {/if}
         </div>
     </div>
-</div>
+{* </div> *}

@@ -4,3 +4,10 @@
 @include media-breakpoint-up(xl) { ... }
 @include media-breakpoint-up(xxl) { ... }
 
+.product-card{
+    transition: transform .2s; /* Animation */
+}
+
+.product-card:hover {
+    transform: scale(1.02);
+}

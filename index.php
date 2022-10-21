@@ -24,11 +24,11 @@ $smarty->assign('categories', $categories);
 //--------------------------------------
 
 $category_id = null;
-if (!empty($_GET['category']) && $_GET['category'] > 0) {
+if (!empty($_GET['category']) && (int) $_GET['category'] > 0) {
     $category_id = (int) $_GET['category'];
     $page = 'products.tpl';
 
-    if (!empty($_GET['product']) && $_GET['product'] > 0) {
+    if (!empty($_GET['product']) && (int) $_GET['product'] > 0) {
         $product_id = (int) $_GET['product'];
 
         $get_product_by_id = array();
@@ -40,9 +40,10 @@ if (!empty($_GET['category']) && $_GET['category'] > 0) {
                 $row['link'] = './?category=' . $category_id . '&product=' . $row['id'];
                 $get_product_by_id[] = $row;
             }
+            $page = 'product.tpl';
         }
-        print_r($get_product_by_id);
-        $smarty->assign('product', $get_product_by_id);
+
+        $smarty->assign('product', current($get_product_by_id));
     }
 
     $get_products_by_category = array();
@@ -59,8 +60,10 @@ if (!empty($_GET['category']) && $_GET['category'] > 0) {
         }
     }
     $smarty->assign('products', $get_products_by_category);
-
-
+}
+elseif (!empty($_GET['category']) && $_GET['category'] === 'on_sale') {
+    # code...
+    var_dump('this is the onsale page');
 }
 $smarty->assign('category_id', intval($category_id));
 
@@ -73,6 +76,9 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         if (strlen($row['description']) > 100)
             $row['description'] = substr($row['description'], 0, 97) . '...';
+
+            $row['link'] = './?category=' . $category_id . '&product=' . $row['id'];
+
         $discounted_products[] = $row;
     }
 }

@@ -1,4 +1,4 @@
-<div class="container">
+{* <div class="container"> *}
     <div class="row">
         <div class="col-12">
             <div class="text-center">
@@ -44,7 +44,7 @@
 
                     {foreach $products as $key => $product}
                         <div class="col">
-                            <div class="card h-100">
+                            <div class="card h-100 product-card">
                                 <a href="{$product.link}">
                                     <img src="https://picsum.photos/200/200" class="card-img-top" alt="{$product.name}">
                                 </a>
@@ -60,7 +60,9 @@
                     {/foreach}
 
                 </div>
+            {else}
+                {include file="error.tpl" type="warning" }
             {/if}
         </div>
     </div>
-</div>
+{* </div> *}
